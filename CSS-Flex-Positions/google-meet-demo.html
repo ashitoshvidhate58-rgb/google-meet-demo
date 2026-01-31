@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,6 @@
 </head>
 
 <style>
-
     .main-container {
         display: flex;
         width: 800px;
@@ -36,7 +36,7 @@
         background-color: rgb(37, 37, 37);
     }
 
-    .nav button{
+    .nav button {
 
         border: none;
         background-color: rgb(20, 19, 19);
@@ -44,22 +44,22 @@
         margin: 80px;
     }
 
-     .msg-screen {
+    .msg-screen {
         border: 1px solid black;
         height: 230px;
         width: 200px;
         margin: 20px;
         padding: 10px;
-    } 
+    }
 
-    .footer button{
+    .footer button {
         border: none;
         background-color: rgb(20, 19, 19);
         color: white;
         margin: 20px;
     }
 
-    
+
 
     .share-screen {
         border: 1px solid black;
@@ -85,29 +85,34 @@
         bottom: 0px;
     }
 
-    .share-audio{
+    .share-audio {
         position: absolute;
         left: 15px;
         top: 280px;
     }
 
-    .toggle{
+    .toggle {
         position: absolute;
         right: 15px;
         top: 280px;
     }
 
-    .msg-screen :nth-child(even){
+    .msg-screen :nth-child(even) {
         background-color: rgb(100, 100, 100);
     }
 
-    .msg-screen :nth-child(odd){
+    .msg-screen :nth-child(odd) {
         background-color: rgb(20, 19, 19);
     }
-    
+
+    img {
+        width: 20px;
+        height: 20px;
+    }
 </style>
+
 <body>
-    
+
 
 
     <div class="main-container">
@@ -118,43 +123,48 @@
             <h5>The site will be able to see the content of your screen</h5>
         </div>
         <div class="nav">
-    <nav>
+            <nav>
 
-        <button style="border-bottom: 1px solid darkgrey;">Chrome Tab</button>
-        <button>Window</button>
-        <button>Entire Screen</button>
-    </nav>
-    </div>
-
-    <div class="main-screen">
-        <div class="msg-screen">
-            
-            <p>Product hunt - Google Search</p>
-            <p>Whatsapp</p>
-            <p>Professional Mail</p>
-            <p>Pay Runs</p>
-            <p>Type script operation</p>
-            <p>CSS - Google Drive</p>
+                <button style="border-bottom: 1px solid darkgrey;">Chrome Tab</button>
+                <button>Window</button>
+                <button>Entire Screen</button>
+            </nav>
         </div>
 
-        <div class="share-screen">
+        <div class="main-screen">
+            <div class="msg-screen">
 
-            <P>Select a tab to share</P>
-
-        </div>
-        <div class="share-audio">
-        <p>Also share tab audio</p>
+                <p>Product hunt - Google Search</p>
+                <p>Whatsapp</p>
+                <p>Professional Mail</p>
+                <p>Pay Runs</p>
+                <p>Type script operation</p>
+                <p>CSS - Google Drive</p>
             </div>
-            <div class="toggle">
-        <img src="https://cdn-icons-png.flaticon.com/128/5720/5720464.png" loading="lazy" alt="Toggle button " title="Toggle button " width="45" height="45">
-        </div>
-    </div>
 
-    <div class="footer">
+            <div class="share-screen">
+
+                <P>Select a tab to share</P>
+
+            </div>
+            <div class="audio">
+                <div class="share-audio">
+                    <span><img src="https://cdn-icons-png.flaticon.com/128/14384/14384318.png" alt="">
+                        Also share tab audio</span>
+                </div>
+                <div class="toggle">
+                    <img src="https://cdn-icons-png.flaticon.com/128/5720/5720464.png" loading="lazy"
+                        alt="Toggle button " title="Toggle button " width="50" height="50">
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
             <button>Cancel</button>
             <button>Share</button>
         </div>
 
     </div>
 </body>
+
 </html>
