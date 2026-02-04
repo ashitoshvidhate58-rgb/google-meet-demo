@@ -1,0 +1,60 @@
+
+        body {
+
+            margin: 0px;
+            padding: 0px;
+            /* background-image: url(https://blog.atdoorstep.ae/wp-content/uploads/2024/02/water-tank-cleaning-services.jpg);
+            background-size: cover; */
+            width: 100%;
+            background-color: lightskyblue;
+            background-repeat: no-repeat;
+        }
+
+
+        .main-container {
+            display: flex;
+            direction: column;
+            gap: 20px;
+        }
+
+        h1 {
+            color: darkblue;
+            padding: 20px;
+        }
+
+        h3,h2 {
+            color: black;
+            margin: 20px;
+        }
+
+        p {
+            color:red;
+            font-size: 20px;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            flex: 1%;
+            background-color: rgb(10, 1, 1);
+            padding: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav a:hover {
+            color: tomato;
+            /* font-size: 18px; */
+        }
+
+        img {
+            width: 85px;
+            height: 85px;
+            margin: 10px;
+            border-radius: 50%;
+        }
+    

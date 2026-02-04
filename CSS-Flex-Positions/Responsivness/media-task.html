@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task</title>
+</head>
+
+<style>
+
+*{
+    box-sizing: border-box;
+
+}
+.item {
+        border:1px solid black;
+        width: 300px;
+        height: 200px;
+        background-color: lightseagreen;
+}
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 22%;
+    gap: 5px;
+}
+
+/* Tablets */
+@media (max-width: 925px) {
+
+    .item {
+        width: 45%;
+        background-color: lightblue;
+    }
+}
+
+
+
+/* Large phones */
+@media (max-width: 480px) {
+
+    .item {
+        width: 100%;
+        background-color: lightgreen;
+    }
+}
+
+
+</style>
+<body>
+    
+    <section class="main-container">
+
+        <div class="item">A</div>
+        <div class="item">B</div>
+        <div class="item">C</div>
+        <div class="item">D</div>
+
+         <div class="item">A</div>
+        <div class="item">B</div>
+        <div class="item">C</div>
+        <div class="item">D</div>
+
+    </section>
+</body>
+</html>
