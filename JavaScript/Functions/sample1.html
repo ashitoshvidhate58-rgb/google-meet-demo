@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Nums | Normal Func</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // Normal function
+    function addNum(num1, num2) {
+        console.log("Num1 is: ", num1)
+        console.log("Num2 is: ", num2)
+        const result = num1 + num2;
+        return result
+    }
+
+    function subNum(num1, num2) {
+        const result = num1 - num2;
+        return result
+    }
+
+    function mulNum(num1, num2) {
+        const result = num1 * num2;
+        return result
+    }
+
+    const sum = addNum(10, 20);
+    const sum6 = addNum(10, 20,30);
+    const sum7 = addNum(10);
+    const sum8 = addNum();
+    const sum2 = subNum(20, 10);
+    const sum3 = mulNum(5, 6);
+    const sum4 = addNum("Rakshit", "Vicky");
+    const sum5 = addNum("Vicky", " Gupta");
+    console.log("Sum is: ", sum)
+    console.log("Sub is: ", sum2)
+    console.log("Mul is: ", sum3)
+    console.log("Sum4 is: ", sum4)
+    console.log("Sum5 is: ", sum5)
+    console.log("Sum6 is: ", sum6)  
+    console.log("Sum7 is: ", sum7)
+    console.log("Sum8 is: ", sum8)
+</script>
