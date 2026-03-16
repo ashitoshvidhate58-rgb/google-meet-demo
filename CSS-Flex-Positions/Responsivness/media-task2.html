@@ -33,56 +33,58 @@
             background-color: gray;
         }
 
-        th, td {
-            
+        th,
+        td {
+
             padding: 5px;
         }
 
         @media print {
 
-           
 
-            invoice table, .invoice th, .invoice td {
+
+            .invoice table,
+            .invoice th,
+            .invoice td {
                 border: 1px solid black;
                 border-collapse: collapse;
                 width: 80%;
                 text-align: center;
             }
 
-                .sub-container h1{
-                    display: flex;
-                    text-align: center;
-                    align-items: center;
-                }
+            .sub-container h2 {
+                text-align: center;
 
-                .content{
-                    position: absolute;
-                    margin-left: 10px;
-                }
+            }
 
-                .sub-content{
-                    position: absolute;
-                    margin-left: 400px;
-                }
-                
-                .invoice{
-                    position: absolute;
-                    margin-top: 150px;
-                    margin-left: 10px;
-                }
+            .content {
+                position: absolute;
+                margin-left: 10px;
+            }
 
-                .total{
-                    position: absolute;
-                    margin-top: 350px;
-                    margin-right: 50px;
-                }
+            .sub-content {
+                position: absolute;
+                margin-left: 400px;
+            }
 
-                button{
-                    display: none;
-                }
+            .invoice {
+                position: absolute;
+                margin-top: 150px;
+                margin-left: 10px;
+            }
+
+            .total {
+                position: absolute;
+                margin-top: 350px;
+                margin-right: 50px;
+            }
+
+            button {
+                display: none;
+            }
         }
 
-        .total{
+        .total {
             position: absolute;
             margin-left: auto;
             margin-top: 330px;
@@ -98,41 +100,41 @@
             <h2>Invoice</h2>
 
             <div class="content">
-            <p>From:</p>
-            <p>My Company</p>
-            <p>mycompany@email.com</p>
-                </div>
+                <p>From:</p>
+                <p>My Company</p>
+                <p>mycompany@email.com</p>
+            </div>
             <div class="sub-content">
-            <p><strong>Invoice #:</strong>12345</p>
-            <p><strong>Date:</strong> 01 Feb 2026</p>
+                <p><strong>Invoice #:</strong>12345</p>
+                <p><strong>Date:</strong> 01 Feb 2026</p>
             </div>
             <div class="invoice">
-            <table>
-                <tr>
-                    <th>Item</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Total</th>
-                </tr>
+                <table>
+                    <tr>
+                        <th>Item</th>
+                        <th>Qty</th>
+                        <th>Price</th>
+                        <th>Total</th>
+                    </tr>
 
-                <tr>
-                    <td>Web Design</td>
-                    <td>1</td>
-                    <td>$500</td>
-                    <td>$500</td>
-                </tr>
+                    <tr>
+                        <td>Web Design</td>
+                        <td>1</td>
+                        <td>$500</td>
+                        <td>$500</td>
+                    </tr>
 
-                <tr>
-                    <td>Hosting</td>
-                    <td>1</td>
-                    <td>$100</td>
-                    <td>$100</td>
-                </tr>
-            </table>
+                    <tr>
+                        <td>Hosting</td>
+                        <td>1</td>
+                        <td>$100</td>
+                        <td>$100</td>
+                    </tr>
+                </table>
             </div>
-            
-            </div>
-            <div class="total">
+
+        </div>
+        <div class="total">
 
             <h4>Grand Total: $600</h4>
 
