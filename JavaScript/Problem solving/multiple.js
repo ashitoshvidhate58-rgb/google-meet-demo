@@ -1,4 +1,4 @@
-let num = 30;
+let num = 60;
 
 for (let i=1; i<=num; i++)
 {
