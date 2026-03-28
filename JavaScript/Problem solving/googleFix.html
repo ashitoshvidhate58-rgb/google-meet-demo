@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoogleMeet</title>
+</head>
+<body>
+    <div class="GooglePage">
+        <div class="Main-Container">
+            <div class="button1">
+                <span>People</span>
+                <span>X</span>
+            </div>
+            <div class="button">
+                <button>All Muted</button>
+                <button>Add people</button>
+            </div>
+            <div class="searchBox">
+                <span>Search</span>
+                <input type="text" placeholder="Search for people">
+            </div>
+            <span class="text">IN THE MEETING</span>
+            <ul id="parcList"></ul>
+        </div>
+    </div>
+
+    <style>
+        body {
+            background-color: #202124;
+            font-family: 'Google Sans', Arial, sans-serif;
+            margin: 0;
+        }
+        .Main-Container {
+            background-color: #2b2b2b;
+            width: 280px;
+            border-radius: 10px;
+            padding: 10px;
+           /*  margin-left: 20px; */
+            margin-top: 10px;
+        }
+        .GooglePage {
+            background-color: #202124;
+            width: 350px;
+            margin: 0 auto;
+        }
+        #parcList {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            height: 500px; 
+            overflow-y: auto;
+            border: 1px solid #5f6368;
+            border-radius: 8px;
+        }
+        .participant {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 8px;
+            color: white;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .participant:hover {
+            background-color: #3c4043;
+        }
+        .icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #5f6368;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .searchBox input {
+            width: 200px;
+            padding: 8px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            background-color: #3c4043;
+            color: white;
+        }
+        .button, .button1 {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .button1 span {
+            background-color: #2b2b2b;
+            color: white;
+        }
+        .button button {
+            background-color: #1a73e8;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .text {
+            color: #9aa0a6;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+    </style>
+
+    <script>
+        const mainPage = document.getElementById('parcList');
+        const participatants = [
+            "Vidhya Skill School",
+            "Abhishek Garg",
+            "Almas Chamadiya",
+            "ANKIT RAJPUT",
+            "Ashitosh Vidhate",
+            "Aviral Jain",
+            "Ayush Gupta",
+            "Deepanshu Garg",
+            "Pinky Thawani",
+            "Prakash",
+            "Pranav Khare",
+            "Rakshit Dalal",
+            "Shivani Vishwakarma",
+            "Shruti Prajapati",
+            "vikas vanve"
+        ];
+
+        participatants.forEach(name => {
+            const parc = document.createElement('li'); // Use li for list
+            parc.classList.add("participant");
+
+            // Create icon (avatar placeholder)
+            const icon = document.createElement('span');
+            icon.classList.add("icon");
+            icon.textContent = name.charAt(0).toUpperCase(); // First letter as avatar
+
+            // Create name span
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = name;
+
+            parc.appendChild(icon);
+            parc.appendChild(nameSpan);
+            mainPage.appendChild(parc);
+        });
+    </script>
+</body>
+</html>

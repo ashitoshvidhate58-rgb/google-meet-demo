@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>To Do App</title>
+
+<style>
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    background: black;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    height: 400px;
+    color: white;
+}
+
+input {
+    width: 70%;
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    
+    
+}
+
+button {
+    padding: 8px;
+    border: none;
+    background: #4caf50;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin-top: 15px;
+}
+
+li {
+    background: #276a9d;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    display: flex;
+    gap: 2px;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+.delete {
+    color: white;
+    cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <h3>To Do List</h3>
+
+    <input type="text" id="taskInput" placeholder="Enter task">
+    <button onclick="addTask()">Add</button>
+
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+
+function addTask() {
+    const input = document.getElementById('taskInput');
+    const task = input.value.trim();
+
+    if (task === "") {
+        alert("Enter something!");
+        return;
+    }
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+        ${task}
+        <button class="delete">Delete</button>
+        `;
+
+    li.querySelector('.delete').addEventListener('click', function() {
+        li.remove();
+    });
+
+    document.getElementById('taskList').appendChild(li);
+
+    input.value = "";
+}
+
+</script>
+
+</body>
+</html>

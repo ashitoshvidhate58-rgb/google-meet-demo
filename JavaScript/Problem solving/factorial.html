@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Factorial</title>
+</head>
+<body>
+    
+
+    <style>
+
+
+    </style>
+
+    <div class="searchBox">
+        <input type="text"  id="Number" placeholder = "enter no">
+
+    </div>
+    <button  id="btn">Find out Factorial</button>
+
+    <h4 id="result"></h4>
+
+</body>
+</html>
+
+<script>
+
+    const x = document.getElementById('Number');
+    const y = document.getElementById('btn');
+    const z= document.getElementById('result');
+
+    y.addEventListener('click', function() {
+        let num = x.value;
+        if(isNaN(num))
+    {
+        alert("enter valid number");
+        return;
+    }
+        let result = 1;
+
+  for (let i = 1; i <= num; i++) {
+    result = result * i;
+  }
+
+z.innerText= "Factorial of" + result;
+
+  z.appendChild(result);
+
+});
+
+
+
+</script>

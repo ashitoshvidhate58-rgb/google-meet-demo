@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoogleMeet</title>
+    
+</head>
+
+<body>
+    
+<div class="GooglePage">
+    <div class="Main-Container">
+
+        <div class="button1">
+        <span >People</span>
+        <span >X</span>
+    </div>
+
+    <div class="button">
+        <button >All Muted</button>
+        <button >Add people</button>
+    </div>
+
+<div class="searchBox">
+    <span>Search</span>
+    <input type="text" placeholder="Search for people">
+
+</div>
+
+<span class="text">IN THE MEETING</span>
+<ul id="parcList">
+</ul>
+    
+</div>
+</div>
+</body>
+
+
+<style>
+
+/*     #parcList{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+        list-style: none;
+        margin: 0;
+    }
+
+    .participant{
+        
+        width: 200px;
+        align-items: left;
+        padding: 12px;
+        color: rgb(244, 238, 238);
+        border: 1px solid gray;
+    }
+
+    .searchBox{padding: 10px;}
+    .searchBox input{
+        width: 100%;
+        border-radius: 8px;
+        padding: 5px;
+        border: 1px solid black;
+    }
+
+    .button{
+        border-radius: 20px;
+        justify-content: space-between;
+        padding: 10px;
+       
+        
+    }
+
+    .Main-Container{
+         background-color: black;
+        width: 280px;
+        border-radius: 10px;
+        
+    }
+     button{
+        background-color: rgb(49, 49, 240);
+        border-radius: 20px;
+        width: 100px;
+        cursor: pointer;
+    }
+
+    .text{color: rgb(145, 144, 144);
+    }
+ */
+
+ body {
+    background-color: #202124;
+    font-family: Arial, sans-serif;
+    
+}
+
+.Main-Container {
+    background-color: #2b2b2b;
+    width: 280px;
+    border-radius: 10px;
+    padding: 10px;
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.GooglePage{
+
+    background-color: rgb(56, 56, 56);
+    width: 350px;
+    margin: auto;
+}
+
+#parcList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border: 2px solid gray;
+    border-radius: 16px;
+    overflow-y: auto;
+    height: 500px;
+    
+}
+
+.participant {
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    width: 200px;
+    text-align: left;
+}
+
+.participant:hover {
+    background-color: #5f6368;
+}
+
+.searchBox input {
+    width: 200px;
+    padding: 8px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+.button, .button1 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.button1 span{
+
+     background-color: #2b2b2b;
+     color: white;
+
+}
+.button button {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.text {
+    color: gray;
+    font-size: 12px;
+    margin: 10px 0;
+}
+</style>
+
+<script>
+    
+    const mainPage = document.getElementById('parcList');
+    const participatants= [
+        "Vidhya Skill School",
+        "Abhishek Garg",
+        "Almas Chamadiya",
+        "ANKIT RAJPUT",
+        "Ashitosh Vidhate",
+        "Aviral Jain",
+        "Ayush Gupta",
+        "Deepanshu Garg",
+        "Pinky Thawani",
+        "Prakash",
+        "Pranav Khare",
+        "Rakshit Dalal",
+        "Shivani Vishwakarma",
+        "Shruti Prajapati",
+        "vikas vanve"
+    ];
+    
+    
+    for(let i=0; i<participatants.length; i++)
+    {
+    const name = participatants[i];
+    const parc = document.createElement('div');
+    parc.classList.add("participant");
+    parc.innerHTML=name;
+
+    mainPage.appendChild(parc);
+    /* 
+    const parc1=document.createElement('span');
+    parc1.classList.add("icon");
+
+mainPage.appendChild(parc1); */
+   }
+    
+    
+</script>
+</body>
+</html>

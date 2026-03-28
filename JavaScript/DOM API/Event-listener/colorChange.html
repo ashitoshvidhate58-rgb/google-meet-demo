@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color change</title>
+</head>
+<body>
+    <button onclick="screenColor('red')" id="btn1">Change color to red</button>
+    <button onclick="screenColor('black')" id="btn2">Change color to black</button>
+
+    <script>
+        const red = document.getElementById('btn1');
+        const black = document.getElementById('btn2');
+
+        
+
+        function screenColor(color) {
+            document.body.style.backgroundColor = color;
+        }
+    </script>
+</body>
+</html>
