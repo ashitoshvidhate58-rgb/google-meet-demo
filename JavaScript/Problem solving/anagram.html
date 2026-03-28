@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anagram</title>
+</head>
+<body>
+    
+
+    <style>
+
+
+    </style>
+
+    <div class="searchBox">
+        <input type="text"  id="str1" placeholder = "enter first name">
+        <input type="text"  id="str2" placeholder = "enter second name">
+    </div>
+    <button  id="btn">Find out Anagram</button>
+
+    <h4 id="result"></h4>
+
+</body>
+</html>
+
+<script>
+const x = document.getElementById('str1');
+const x1 = document.getElementById('str2');
+const y = document.getElementById('btn');
+const z = document.getElementById('result');
+
+y.addEventListener('click', function() {
+
+    let num = x.value.toLowercase();
+    let num1 = x1.value.toLowercase();
+
+    
+    if (num.length !== num1.length) {
+        z.innerText = "Not Anagram";
+        return;
+    }
+
+    
+    let sorted1 = num.split('').sort().join('');
+    let sorted2 = num1.split('').sort().join('');
+
+    if (sorted1 === sorted2) {
+        z.innerText = "Anagram";
+    } else {
+        z.innerText = "Not Anagram";
+    }
+    
+});
+</script>

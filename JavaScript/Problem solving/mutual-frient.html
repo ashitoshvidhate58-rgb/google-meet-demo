@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+        <div class="mainContainer" id="main-box">
+
+            <div class="friendAList">
+                <ul id="friend-a"></ul>
+            </div>
+
+            <div class="friendBList">
+                <ul id="friend-b"></ul>
+            </div>
+
+            <div class="commonList">
+                <ul id="common-AB"></ul>
+            </div>
+
+            <button id="btn">CommonList</button>
+
+        </div>
+</body>
+</html>
+
+<script>
+
+const friendsA = [
+  "Amit",
+  "Rohit",
+  "Priya",
+  "Neha",
+  "Karan",
+  "Sneha",
+  "Vikas",
+  "Anjali",
+  "Rahul",
+  "Simran"
+];
+
+const friendsB = [
+  "Rohit",
+  "Neha",
+  "Karan",
+  "Simran",
+  "Arjun",
+  "Pooja",
+  "Vikas",
+  "Meena",
+  "Rahul",
+  "Tina"
+];
+
+
+const FriendElemA = document.getElementById("friend-a");
+const FriendElemB = document.getElementById("friend-b");
+const mutualFriendElem = document.getElementById("common-AB");
+const btnCommonElem = document.getElementById("btn");
+
+
+
+const findMutualFriends = (groupA, groupB) => {
+    
+    const common = [];
+    for(let i=0; i<friendsA.length; i++){
+
+        let aList = friendsA[i];
+
+        for(let j=0; j<friendsB.length; j++){
+
+            let bList = friendsB[j];
+
+            if(aList === bList){
+                
+                common.push(aList);
+                break;
+
+            }
+
+        }
+
+    }
+    return common;
+}
+
+const renderList = (element, data) => {
+    element.innerHTML = "";
+    data.forEach(name => {
+        const li = document.createElement("li");
+        li.textContent = name;
+        element.appendChild(li);
+    });
+};
+
+renderList(FriendElemA, friendsA);
+renderList(FriendElemB, friendsB);
+
+btnCommonElem.addEventListener('click',()=>{
+
+const result = findMutualFriends(friendsA, friendsB);
+
+mutualFriendElem.innerHTML = "";
+
+    result.forEach(name => {
+        const li = document.createElement("li");
+        li.textContent = name;
+        mutualFriendElem.appendChild(li);
+    });
+
+    
+});
+</script>

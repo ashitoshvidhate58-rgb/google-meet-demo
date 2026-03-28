@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        .mainPage{
+            
+        }
+    </style>
+    <div class="Main-Container" id="mainPage">
+
+
+    </div>
+</body>
+</html>
+
+<script>
+
+    const dataListContainer = document.getElementById("mainPage");
+
+fetch('https://fakestoreapi.com/products')
+  .then(response => response.json())
+  .then(data => {
+    
+    for (let i = 0; i < data.length; i++) {
+    const currentData = data[i];
+
+    const dataTitle = document.createElement('div');
+    dataTitle.innerText = currentData.title;
+    dataListContainer.appendChild(dataTitle);
+
+    // const dataPrice = document.createElement('div');
+    // dataPrice.innerText = currentData.price;
+    // dataListContainer.appendChild(dataPrice);
+
+}})
+
+.catch(error => {
+    console.log("Error:", error);
+  });
+</script>
