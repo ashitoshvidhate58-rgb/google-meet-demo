@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,7 +22,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 12px 20px;
-            background: white;
+            background: #6b2bd9;
             border-bottom: 1px solid #eee;
             position: sticky;
             top: 0;
@@ -31,14 +30,14 @@
         }
 
         .logo {
-            font-size: 22px;
+            font-size: 28px;
             font-weight: 700;
-            color: #6b2bd9;
+            color: white;
         }
 
         .location {
             font-size: 13px;
-            color: #444;
+            color: white;
             margin-left: 10px;
         }
 
@@ -58,6 +57,7 @@
             display: flex;
             gap: 20px;
             font-size: 14px;
+            color: white;
         }
 
         /* GRID */
@@ -103,6 +103,36 @@
             padding: 6px 12px;
             font-weight: 600;
             cursor: pointer;
+        }
+
+        .qty-control {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            background: #ff2c7d;
+            border-radius: 8px;
+            padding: 4px 8px;
+        }
+
+        .qty-btn {
+            background: white;
+            border: none;
+            color: #ff2c7d;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .qty-text {
+            color: white;
+            font-weight: 600;
+            min-width: 20px;
+            text-align: center;
         }
 
         /* PRICE */
@@ -160,29 +190,92 @@
             width: fit-content;
         }
 
+        /* CART OVERLAY */
         #cart-container {
             position: fixed;
-            right: 20px;
-            top: 70px;
+            right: 0;
+            top: 0;
+            width: 350px;
+            height: 100vh;
             background: white;
-            z-index: 1000;
-            width: 300px;
+            z-index: 1001;
             display: none;
-            /* 👈 important */
-            border: 1px solid black;
-            padding: 10px;
+            flex-direction: column;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
         }
 
-        #cart-items div {
-            font-size: 14px;
-            margin-bottom: 6px;
+        #cart-container.active {
+            display: flex;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            background: #f6f6f6;
+        }
+
+        .cart-header h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        #close-cart {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #ff2c7d;
+        }
+
+        #cart-items {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            border-bottom: 1px solid #eee;
+            font-size: 13px;
+        }
+
+        .qty-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .qty-container button {
+            width: 22px;
+            height: 22px;
+            border: 1px solid #ff2c7d;
+            background: white;
+            color: #ff2c7d;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #cart-total {
+            padding: 15px;
+            border-top: 2px solid #eee;
+            background: #f6f6f6;
+            font-weight: 600;
+            line-height: 1.8;
         }
 
         #cart-icon {
             position: fixed;
             right: 20px;
-            top: 20px;
-            background: #ff3269;
+            top: 15px;
+            background: #ff2c7d;
             color: white;
             padding: 10px 14px;
             border-radius: 50px;
@@ -197,23 +290,27 @@
 
 
 <body>
-    <h1>My Products</h1>
-
-    <div id="cart-icon" onclick="toggleCart()">
-        🛒 <span id="cart-count">0</span>
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">Zepto</div>
+        <div class="actions">
+            <span id="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></span>
+        </div>
     </div>
 
-    <div id="cart-container" style="border:1px solid black; padding:10px; margin:20px;">
-        <h2>Your Cart</h2>
+    <!-- CART OVERLAY -->
+    <div id="cart-container">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button id="close-cart" onclick="toggleCart()">✕</button>
+        </div>
         <div id="cart-items">
-            <!-- Cart items will be rendered here -->
             <p>Your cart is empty.</p>
         </div>
         <div id="cart-total"></div>
-        <!-- You can keep the cart icon visible or remove it if the cart container is always open -->
-        <!-- <div id="cart-icon" onclick="toggleCart()">🛒 <span id="cart-count">0</span></div> -->
     </div>
 
+    <!-- PRODUCTS GRID -->
     <div id="product-list"></div>
 </body>
 
@@ -885,228 +982,230 @@
 
 
     const productListContainer = document.getElementById("product-list");
-    const cartItemsContainer = document.getElementById("cart-items");
-    const cartTotalElem = document.getElementById("cart-total");
-    const cartCountElem = document.getElementById("cart-count");
+        const cartItemsContainer = document.getElementById("cart-items");
+        const cartTotalElem = document.getElementById("cart-total");
+        const cartCountElem = document.getElementById("cart-count");
 
-    // Initialize basket from localStorage or as an empty array
-    let basket = JSON.parse(localStorage.getItem("cart")) || [];
+        let basket = JSON.parse(localStorage.getItem("cart")) || [];
 
-    function saveCart() {
-        localStorage.setItem("cart", JSON.stringify(basket));
-    }
+        function saveCart() {
+            localStorage.setItem("cart", JSON.stringify(basket));
+        }
 
-    function renderCart() {
-        cartItemsContainer.innerHTML = ""; // Clear existing cart items
-        let total = 0;
-        let totalItems = 0;
+        function renderCart() {
+            cartItemsContainer.innerHTML = "";
+            let total = 0;
+            let totalItems = 0;
 
-        if (basket.length === 0) {
-            cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
-        } else {
-            basket.forEach((item, index) => {
-                const div = document.createElement("div");
-                div.classList.add("cart-item");
+            if (basket.length === 0) {
+                cartItemsContainer.innerHTML = "<p>Your cart is empty.</p>";
+            } else {
+                basket.forEach((item, index) => {
+                    const div = document.createElement("div");
+                    div.classList.add("cart-item");
 
-                const itemDetails = document.createElement("span");
-                itemDetails.innerText = `${item.name.slice(0, 20)}... - ₹${item.price}`;
+                    const itemDetails = document.createElement("span");
+                    itemDetails.innerText = `${item.name.slice(0, 20)}...\n₹${item.price}`;
 
-                const qtyContainer = document.createElement("div");
-                qtyContainer.classList.add("qty-container");
+                    const qtyContainer = document.createElement("div");
+                    qtyContainer.classList.add("qty-container");
 
-                const minusBtn = document.createElement("button");
-                minusBtn.innerText = "-";
-                // Added a class for styling if needed
-                minusBtn.classList.add("qty-btn");
-                minusBtn.onclick = () => {
-                    item.quantity--;
-                    if (item.quantity === 0) {
-                        basket.splice(index, 1); // Remove item if quantity drops to 0
+                    const minusBtn = document.createElement("button");
+                    minusBtn.innerText = "−";
+                    minusBtn.onclick = () => {
+                        item.quantity--;
+                        if (item.quantity === 0) {
+                            basket.splice(index, 1);
+                        }
+                        saveCart();
+                        renderCart();
+                    };
+
+                    const qtyText = document.createElement("span");
+                    qtyText.innerText = item.quantity;
+
+                    const plusBtn = document.createElement("button");
+                    plusBtn.innerText = "+";
+                    plusBtn.onclick = () => {
+                        item.quantity++;
+                        saveCart();
+                        renderCart();
+                    };
+
+                    qtyContainer.append(minusBtn, qtyText, plusBtn);
+
+                    const itemTotalPrice = document.createElement("span");
+                    itemTotalPrice.innerText = `₹${(item.price * item.quantity).toFixed(2)}`;
+
+                    div.append(itemDetails, qtyContainer, itemTotalPrice);
+                    cartItemsContainer.appendChild(div);
+
+                    total = total + item.price * item.quantity;
+                    totalItems = totalItems + item.quantity;
+                });
+            }
+
+            let deliveryCharge = 0;
+            let finalTotal = total;
+
+            if (total < 150 && total > 0) {
+                deliveryCharge = 50;
+                finalTotal = finalTotal + deliveryCharge;
+            }
+
+            if (basket.length === 0) {
+                cartTotalElem.innerText = "";
+            } else {
+                cartTotalElem.innerHTML = `
+                    Subtotal: ₹${total.toFixed(2)} <br>
+                    Delivery: ${deliveryCharge === 0 ? "FREE" : "₹" + deliveryCharge} <br>
+                    <strong>Total: ₹${finalTotal.toFixed(2)}</strong>
+                `;
+            }
+
+            cartCountElem.innerText = totalItems;
+        }
+
+        function toggleCart() {
+            document.getElementById("cart-container").classList.toggle("active");
+        }
+
+        // Render products
+        for (let i = 0; i < products.length; i++) {
+            const currentProduct = products[i];
+            const parentBoxElem = document.createElement('div');
+            parentBoxElem.classList.add("box-item");
+
+            const primaryHeaderContainer = document.createElement("div");
+            primaryHeaderContainer.classList.add("primary-container");
+
+            const productImgElem = document.createElement("img");
+            productImgElem.classList.add("box-item-img");
+            productImgElem.src = currentProduct.image;
+            primaryHeaderContainer.appendChild(productImgElem);
+
+            const btn = document.createElement("button");
+            btn.classList.add("add-btn");
+            btn.innerText = "ADD";
+            btn.id = `btn-${i}`;
+
+            const qtyControl = document.createElement("div");
+            qtyControl.classList.add("qty-control");
+            qtyControl.style.display = "none";
+            qtyControl.id = `qty-${i}`;
+
+            const minusBtn = document.createElement("button");
+            minusBtn.classList.add("qty-btn");
+            minusBtn.innerText = "−";
+
+            const qtyText = document.createElement("span");
+            qtyText.classList.add("qty-text");
+            qtyText.innerText = "1";
+            qtyText.id = `qty-text-${i}`;
+
+            const plusBtn = document.createElement("button");
+            plusBtn.classList.add("qty-btn");
+            plusBtn.innerText = "+";
+
+            qtyControl.append(minusBtn, qtyText, plusBtn);
+
+            btn.addEventListener('click', () => {
+                let productInCart = basket.find((item) => item.name === currentProduct.name);
+
+                if (!productInCart) {
+                    basket.push({ ...currentProduct, quantity: 1 });
+                    btn.style.display = "none";
+                    qtyControl.style.display = "flex";
+                    qtyText.innerText = "1";
+                } else {
+                    productInCart.quantity++;
+                    qtyText.innerText = productInCart.quantity;
+                }
+                saveCart();
+                renderCart();
+            });
+
+            minusBtn.addEventListener('click', () => {
+                let productInCart = basket.find((item) => item.name === currentProduct.name);
+                if (productInCart) {
+                    productInCart.quantity--;
+                    if (productInCart.quantity === 0) {
+                        basket = basket.filter((item) => item.name !== currentProduct.name);
+                        btn.style.display = "block";
+                        qtyControl.style.display = "none";
+                    } else {
+                        qtyText.innerText = productInCart.quantity;
                     }
                     saveCart();
                     renderCart();
-                };
+                }
+            });
 
-                const qtyText = document.createElement("span");
-                qtyText.innerText = item.quantity;
-
-                const plusBtn = document.createElement("button");
-                plusBtn.innerText = "+";
-                // Added a class for styling if needed
-                plusBtn.classList.add("qty-btn");
-                plusBtn.onclick = () => {
-                    item.quantity++;
+            plusBtn.addEventListener('click', () => {
+                let productInCart = basket.find((item) => item.name === currentProduct.name);
+                if (productInCart) {
+                    productInCart.quantity++;
+                    qtyText.innerText = productInCart.quantity;
                     saveCart();
                     renderCart();
-                };
-
-                qtyContainer.append(minusBtn, qtyText, plusBtn);
-
-                const itemTotalPrice = document.createElement("span");
-                itemTotalPrice.innerText = `₹${(item.price * item.quantity).toFixed(2)}`;
-                itemTotalPrice.style.marginLeft = '10px'; // Add some spacing
-
-                div.append(itemDetails, qtyContainer, itemTotalPrice);
-                cartItemsContainer.appendChild(div);
-
-                total += item.price * item.quantity;
-                totalItems += item.quantity;
+                }
             });
-        }
 
-        //delivery free if total grater than 150.
+            primaryHeaderContainer.append(btn, qtyControl);
+            parentBoxElem.appendChild(primaryHeaderContainer);
 
-        let deliveryCharge = 0;
-        let finalTotal = total;
+            // ...rest of product details...
+            const secondaryHeaderContainer = document.createElement("div");
 
-        if (total < 150 && total > 0) {
-            deliveryCharge = 50;
-            finalTotal = finalTotal + deliveryCharge;
-        }
+            const priceContainer = document.createElement("div");
+            priceContainer.classList.add("price-row");
+            priceContainer.textContent = `₹${currentProduct.price.toFixed(2)}`;
 
-        if (basket.length === 0) {
-            cartTotalElem.innerText = "";
-        } else {
-            cartTotalElem.innerHTML = `
-        Subtotal: ₹${total.toFixed(2)} <br>
-        Delivery: ${deliveryCharge === 0 ? "FREE" : "₹" + deliveryCharge} <br>
-        <strong>Total: ₹${finalTotal.toFixed(2)}</strong>
-    `;
-        }
-
-     cartCountElem.innerText = totalItems;
-    }
-
-    function toggleCart() {
-        const cart = document.getElementById("cart-container");
-
-        if (cart.style.display === "none" || cart.style.display === "") {
-            cart.style.display = "block";
-        } else {
-            cart.style.display = "none";
-        }
-    }
-
-    // This function is no longer needed as we're not navigating to a new page
-    // function goToCart() {
-    //     window.location.href = "cart.html";
-    // }
-
-    // Loop to render products
-    for (let i = 0; i < products.length; i++) {
-        const currentProduct = products[i];
-
-        // Parent box element
-        const parentBoxElem = document.createElement('div');
-        parentBoxElem.classList.add("box-item");
-
-        // Primary header container (Image and Add Button)
-        const primaryHeaderContainer = document.createElement("div");
-        primaryHeaderContainer.classList.add("primary-container");
-
-        // Set an image inside the box
-        const productImgElem = document.createElement("img");
-        productImgElem.classList.add("box-item-img");
-        productImgElem.src = currentProduct.image;
-        primaryHeaderContainer.appendChild(productImgElem);
-
-        // Add button
-        const btn = document.createElement("button");
-        btn.classList.add("add-btn");
-        btn.innerText = "ADD";
-
-        btn.addEventListener('click', () => {
-            let productInCart = basket.find((item) => item.name === currentProduct.name);
-
-            if (!productInCart) {
-                basket.push({ ...currentProduct, quantity: 1 });
-            } else {
-                productInCart.quantity++;
+            if (currentProduct.original_price) {
+                const originalPrice = document.createElement("span");
+                originalPrice.classList.add("original-price");
+                originalPrice.textContent = `₹${currentProduct.original_price.toFixed(2)}`;
+                priceContainer.appendChild(originalPrice);
             }
-            saveCart(); // Save changes to local storage
-            renderCart(); // Re-render the cart display
-        });
-        primaryHeaderContainer.appendChild(btn);
-        parentBoxElem.appendChild(primaryHeaderContainer);
 
+            if (currentProduct.discount) {
+                const discount = document.createElement("span");
+                discount.classList.add("discount");
+                discount.textContent = `${currentProduct.discount}% off`;
+                priceContainer.appendChild(discount);
+            }
 
-        // Secondary body container (Product details)
-        const secondaryHeaderContainer = document.createElement("div");
-        secondaryHeaderContainer.classList.add("secondary-container"); // Added a class for potential styling
+            secondaryHeaderContainer.appendChild(priceContainer);
 
-        // Price container
-        const priceContainer = document.createElement("div");
-        priceContainer.classList.add("price-container");
-        priceContainer.textContent = `₹${currentProduct.price.toFixed(2)}`;
-        secondaryHeaderContainer.appendChild(priceContainer);
+            const productNameElem = document.createElement("p");
+            productNameElem.classList.add("item-name");
+            productNameElem.textContent = currentProduct.name;
+            secondaryHeaderContainer.appendChild(productNameElem);
 
-        // Original Price and Discount (If available)
-        if (currentProduct.original_price) {
-            const originalPriceContainer = document.createElement("span"); // Changed to span for inline display
-            originalPriceContainer.classList.add("original-price-container");
-            originalPriceContainer.style.textDecoration = "line-through";
-            originalPriceContainer.style.marginLeft = "10px";
-            originalPriceContainer.textContent = `₹${currentProduct.original_price.toFixed(2)}`;
-            priceContainer.appendChild(originalPriceContainer); // Append to priceContainer to keep it together
+            const packSizeElem = document.createElement("p");
+            packSizeElem.classList.add("item-pack-size");
+            packSizeElem.textContent = currentProduct.pack_size;
+            secondaryHeaderContainer.appendChild(packSizeElem);
+
+            if (currentProduct.variant) {
+                const variantElem = document.createElement("div");
+                variantElem.classList.add("item-variant");
+                variantElem.textContent = currentProduct.variant;
+                secondaryHeaderContainer.appendChild(variantElem);
+            }
+
+            const ratingContainer = document.createElement("div");
+            ratingContainer.classList.add("item-rating-review-container");
+            ratingContainer.innerHTML = `
+                <i class="fa-solid fa-star" style="color: gold;"></i> ${currentProduct.rating}
+                (${currentProduct.reviews})
+            `;
+            secondaryHeaderContainer.appendChild(ratingContainer);
+
+            parentBoxElem.appendChild(secondaryHeaderContainer);
+            productListContainer.appendChild(parentBoxElem);
         }
 
-        if (currentProduct.discount) {
-            const discountPriceContainer = document.createElement("span"); // Changed to span for inline display
-            discountPriceContainer.classList.add("discount-price-container");
-            discountPriceContainer.style.color = "red";
-            discountPriceContainer.style.marginLeft = "10px";
-            discountPriceContainer.textContent = `${currentProduct.discount}% off`;
-            priceContainer.appendChild(discountPriceContainer); // Append to priceContainer
-        }
-
-        // Name container
-        const productNameElem = document.createElement("p");
-        productNameElem.classList.add("item-name");
-        productNameElem.textContent = currentProduct.name;
-        secondaryHeaderContainer.appendChild(productNameElem);
-
-        // Brand container
-        const productBrandNameElem = document.createElement("p");
-        productBrandNameElem.classList.add("item-brand-name");
-        productBrandNameElem.textContent = currentProduct.brand;
-        secondaryHeaderContainer.appendChild(productBrandNameElem);
-
-        // Pack size container
-        const packSizeElem = document.createElement("p");
-        packSizeElem.classList.add("item-pack-size");
-        packSizeElem.textContent = currentProduct.pack_size;
-        secondaryHeaderContainer.appendChild(packSizeElem);
-
-        // Variant container
-        if (currentProduct.variant) {
-            const variantElem = document.createElement("div");
-            variantElem.classList.add("item-variant");
-            variantElem.textContent = currentProduct.variant;
-            secondaryHeaderContainer.appendChild(variantElem);
-        }
-
-        // Rating & Review container
-        const ratingAndReviewContainer = document.createElement("div");
-        ratingAndReviewContainer.classList.add("item-rating-review-container");
-
-        const ratingElem = document.createElement("div");
-        ratingElem.classList.add("item-rating");
-        ratingElem.style.display = "flex"; // To align star icon if added
-        ratingElem.innerHTML = `<i class="fa-solid fa-star" style="color: gold; margin-right: 4px;"></i>${currentProduct.rating}`; // Added star icon
-
-        const reviewsElem = document.createElement("div");
-        reviewsElem.classList.add("item-reviews");
-        reviewsElem.textContent = `(${currentProduct.reviews} reviews)`; // Clarified "reviews"
-
-        ratingAndReviewContainer.appendChild(ratingElem);
-        ratingAndReviewContainer.appendChild(reviewsElem);
-        secondaryHeaderContainer.appendChild(ratingAndReviewContainer)
-
-        parentBoxElem.appendChild(secondaryHeaderContainer);
-        productListContainer.appendChild(parentBoxElem);
-    }
-
-    // Initial render of the cart when the page loads
-    renderCart();
-
+        renderCart();
+    
 </script>
