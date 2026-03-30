@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail</title>
+</head>
+<body>
+    
+<style>
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f1f3f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Container */
+#Gform {
+    width: 500px;
+    margin: 40px auto;
+    background: white;
+    border-radius: 10px;
+    padding: 20px 25px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Labels */
+#Gform label {
+    display: block;
+    font-size: 13px;
+    color: #5f6368;
+    margin-top: 12px;
+}
+
+/* Inputs */
+#Gform input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #dadce0;
+    padding: 8px 0;
+    font-size: 14px;
+    outline: none;
+}
+
+/* Focus effect */
+#Gform input:focus {
+    border-bottom: 2px solid #1a73e8;
+}
+
+/* Textarea */
+.mail-content {
+    width: 100%;
+    height: 150px;
+    border: none;
+    border-top: 1px solid #dadce0;
+    margin-top: 15px;
+    padding: 10px 0;
+    resize: none;
+    font-size: 14px;
+    outline: none;
+}
+
+/* Button */
+#btn {
+    margin-top: 15px;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Button hover */
+#btn:hover {
+    background: #1669c1;
+}
+
+</style>
+
+<form id="GMail-form">
+
+<div id="Gform" class="Main-Container">
+
+
+<label for="to">TO:</label>
+<input type="email" name="email-ID" id="to" required>
+
+<label for="cc">CC:</label>
+<input type="email" name="email-ID" id="cc">
+
+<label for="bcc">BCC:</label>
+<input type="email" name="email-ID" id="bcc">
+
+<label for="subject">Subject:</label>
+<input type="text" name="email-ID" id="subject">
+
+<div>
+
+    <textarea id="message" name="email-ID" class="mail-content">
+
+    </textarea>
+
+    <button type="submit" id="btn">submit</button>
+
+</div>
+
+</div>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+
+const gmailForm = document.getElementById("Gmail-form");
+const inputTo = document.getElementById('to');
+const inputCC = document.getElementById('cc');
+const inputBCC = document.getElementById('bcc');
+const inputSubject = document.getElementById('subject');
+const inputTextarea = document.getElementById('message');
+const submitBtn = document.getElementById('btn');
+
+submitBtn.addEventListener("click",function(event) {
+    
+    const to = document.getElementById("to").value;
+    const cc = document.getElementById("cc").value;
+    const bcc = document.getElementById("Bcc").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    console.log(to, cc, bcc, subject, message);
+});
+
+emailjs.init("service_nu1pe27");
+
+document.getElementById("gmailForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    emailjs.send("service_nu1pe27", "template_1nxzyii", {
+        to_email: document.getElementById("to").value,
+        subject: document.getElementById("subject").value,
+        message: document.getElementById("message").value
+    })
+    .then(() => {
+        alert("Email Sent ✅");
+    })
+    .catch(() => {
+        alert("Error ❌");
+    });
+});
+
+
+</script>
+</body>
+</html>
