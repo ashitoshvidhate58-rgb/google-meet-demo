@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+
+    const profiles = [
+        {
+            "otp": 12345,
+            "name": "Amit",
+            "app": "Google",
+            "city": "Delhi"
+        },
+        {
+            "otp": 54321,
+            "name": "Riya",
+            "app": "ICICI",
+            "city": "Mumbai"
+        },
+        {
+            "otp": 14785,
+            "name": "Karan",
+            "app": "SBI",
+            "city": "Bangalore"
+        },
+        {
+            "otp": 96325,
+            "name": "Sneha",
+            "app": "Gmail",
+            "city": "Pune"
+        },
+        {
+            "otp": 15975,
+            "name": "Rahul",
+            "app": "Jio-hotstar",
+            "city": "Jaipur"
+        }
+    ];
+
+   function OTP(user, appName, otpKey) {
+
+    const profile = profiles.find(profiles => 
+        profiles.name === user && 
+        profiles.app === appName && 
+        profiles.otp === otpKey
+    );
+
+
+    const { name, app, otp } = profile;
+
+    const msg = `Hello, ${name}. Your ${app} OTP is ${otp}. Please do not share it with anyone & it's valid for 30 min only.`;
+
+    return msg;
+}
+
+const result = OTP("Amit","Google",12345);
+console.log(result);
+
+
+</script>
