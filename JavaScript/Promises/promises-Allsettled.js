@@ -1,0 +1,41 @@
+const p1 = () => {
+  return new Promise((reply, reject) => {
+    setTimeout(() => {
+      reply({ message: "P1 Success" });
+    }, 2000);
+  });
+};
+
+const p2 = () => {
+  return new Promise((reply, reject) => {
+    setTimeout(() => {
+      reply({ message: "P2 Success" });
+    }, 2000);
+  });
+};
+
+const p3 = () => {
+  return new Promise((reply, reject) => {
+    setTimeout(() => {
+      reply({ message: "P3 Success" });
+    }, 2000);
+  });
+};
+
+const p4 = () => {
+  return new Promise((reply, reject) => {
+    setTimeout(() => {
+      reject({ message: "P4 Error" });
+    }, 2000);
+  });
+};
+
+// Way 1 - using .then & .catch
+Promise.allSettled([p1(), p2(), p3(), p4()])
+  .then((data) => {
+    console.log("Data: ", data);
+  })
+  .catch((err) => {
+    console.log("Error: ", err);
+  });
+
